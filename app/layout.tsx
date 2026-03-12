@@ -1,5 +1,6 @@
 import "./globals.css"
 import { ReactNode } from "react"
+import Navbar from "@/components/navbar/navbar"
 
 export const metadata = {
   title: "Pike",
@@ -14,7 +15,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+
+        <Navbar />
+
+        <main className="relative">
+          {children}
+        </main>
+
       </body>
     </html>
   )
