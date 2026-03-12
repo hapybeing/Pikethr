@@ -13,13 +13,15 @@ export default function GraphSection() {
     <section
       id="graph-section"
       style={{
-        padding: "140px 20px",
-        textAlign: "center"
+        position: "relative",
+        minHeight: "100vh",
+        paddingTop: "120px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
       }}
     >
-
-      <div style={{ maxWidth: "900px", margin: "0 auto", marginBottom: "60px" }}>
-
+      <div style={{ textAlign: "center", marginBottom: "40px" }}>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,7 +29,7 @@ export default function GraphSection() {
           style={{
             fontSize: "42px",
             fontWeight: 600,
-            marginBottom: "20px"
+            marginBottom: "16px"
           }}
         >
           Explore Knowledge
@@ -39,24 +41,25 @@ export default function GraphSection() {
           transition={{ delay: 0.2 }}
           style={{
             color: "#aaa",
-            fontSize: "18px"
+            fontSize: "18px",
+            maxWidth: "700px",
+            margin: "0 auto"
           }}
         >
           Pike maps ideas into an explorable network where discoveries connect across disciplines.
         </motion.p>
-
       </div>
 
       <div
         style={{
-          height: "600px",
+          width: "100%",
+          height: "70vh",
           maxWidth: "1200px",
-          margin: "0 auto"
+          position: "relative"
         }}
       >
         <KnowledgeGraph />
       </div>
-
     </section>
   )
 }
