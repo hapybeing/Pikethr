@@ -4,17 +4,17 @@ import Navbar from "@/components/navbar/navbar"
 
 export const metadata = {
   title: "Pike",
-  description: "Explore human knowledge as a living universe"
+  description: "Explore human knowledge as a living universe",
 }
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: ReactNode
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-background text-foreground">
 
         <Navbar />
 
