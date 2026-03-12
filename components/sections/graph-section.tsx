@@ -1,65 +1,48 @@
 "use client"
 
-import { motion } from "framer-motion"
-import dynamic from "next/dynamic"
+import { Canvas } from "@react-three/fiber"
+import { OrbitControls } from "@react-three/drei"
+import { useMemo } from "react"
 
-const KnowledgeGraph = dynamic(
-  () => import("@/components/graph/knowledge-graph"),
-  { ssr: false }
-)
+function Nodes() {
+  const nodes = useMemo(() => {
+    const arr = []
+    for (let i = 0; i < 80; i++) {
+      arr.push([
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 6,
+        (Math.random() - 0.5) * 10
+      ])
+    }
+    return arr
+  }, [])
 
-export default function GraphSection() {
   return (
-    <section
-      id="graph-section"
+    <>
+      {nodes.map((pos, i) => (
+        <mesh key={i} position={pos as any}>
+          <sphereGeometry args={[0.05, 16, 16]} />
+          <meshBasicMaterial color="#8ab4ff" />
+        </mesh>
+      ))}
+    </>
+  )
+}
+
+export default function KnowledgeGraph() {
+  return (
+    <Canvas
       style={{
-        position: "relative",
-        minHeight: "100vh",
-        paddingTop: "120px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center"
+        width: "100%",
+        height: "100%"
       }}
+      camera={{ position: [0, 0, 8] }}
     >
-      <div style={{ textAlign: "center", marginBottom: "40px" }}>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          style={{
-            fontSize: "42px",
-            fontWeight: 600,
-            marginBottom: "16px"
-          }}
-        >
-          Explore Knowledge
-        </motion.h2>
+      <ambientLight intensity={0.6} />
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          style={{
-            color: "#aaa",
-            fontSize: "18px",
-            maxWidth: "700px",
-            margin: "0 auto"
-          }}
-        >
-          Pike maps ideas into an explorable network where discoveries connect across disciplines.
-        </motion.p>
-      </div>
+      <Nodes />
 
-      <div
-        style={{
-          width: "100%",
-          height: "70vh",
-          maxWidth: "1200px",
-          position: "relative"
-        }}
-      >
-        <KnowledgeGraph />
-      </div>
-    </section>
+      <OrbitControls enableZoom enablePan enableRotate />
+    </Canvas>
   )
 }
