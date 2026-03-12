@@ -3,12 +3,12 @@ import Lenis from "lenis"
 let lenis: Lenis | null = null
 
 export function initScrollEngine() {
+
   if (lenis) return lenis
 
   lenis = new Lenis({
     duration: 1.2,
-    smoothWheel: true,
-    smoothTouch: false
+    smoothWheel: true
   })
 
   function raf(time: number) {
